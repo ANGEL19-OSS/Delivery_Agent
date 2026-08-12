@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Delivery Agent',
+      //  home: SuccessfulCard(),
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
     );

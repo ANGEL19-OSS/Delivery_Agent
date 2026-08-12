@@ -1,5 +1,8 @@
 import 'package:deliveryagent/app/modules/home/controllers/home_controller.dart';
 import 'package:deliveryagent/app/modules/login/controllers/login_controller.dart';
+import 'package:deliveryagent/app/modules/map_view/controllers/map_controller.dart';
+import 'package:deliveryagent/app/modules/map_view/views/map_view.dart';
+import 'package:deliveryagent/app/modules/order_detail/controllers/order_detail_controller.dart';
 import 'package:get/get.dart';
 import '../modules/checkin/views/checkin_view.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
@@ -29,7 +32,26 @@ class AppPages {
         () => Get.lazyPut<HomeController>(() => HomeController()),
       ),
     ),
-    GetPage(name: Routes.orderDetail, page: () => const OrderDetailView()),
+    GetPage(
+      name: Routes.orderDetail,
+      page: () => OrderDetailView(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<OrderDetailController>(() => OrderDetailController());
+        if (!Get.isRegistered<HomeController>()) {
+          Get.lazyPut<HomeController>(() => HomeController());
+        }
+      }),
+    ),
+    GetPage(
+      name: Routes.mapView,
+      page: () => const MapView(),
+      binding: BindingsBuilder(() {
+        Get.lazyPut<MapController>(() => MapController());
+        if (!Get.isRegistered<HomeController>()) {
+          Get.lazyPut<HomeController>(() => HomeController());
+        }
+      }),
+    ),
     GetPage(name: Routes.dashboard, page: () => const DashboardView()),
   ];
 }

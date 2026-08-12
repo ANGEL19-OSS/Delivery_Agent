@@ -247,7 +247,7 @@ class LoginView extends GetView<LoginController> {
                                           // 1. Show Locating Splash Dialog
                                           Get.dialog(
                                             const LocatingCard(
-                                              message: 'Locating.......',
+                                              message: 'Locating....',
                                             ),
                                             barrierDismissible: false,
                                           );

@@ -12,6 +12,7 @@ class HomeController extends GetxController {
 
   final LocationService locationService = LocationService();
   Rxn<WeatherModel> weather = Rxn<WeatherModel>();
+  RxInt currentIndex = 0.obs;
   RxBool isWeatherLoading = true.obs;
   RxString weatherError = ''.obs;
   var cityname = 'Loading...'.obs;
@@ -133,7 +134,8 @@ class HomeController extends GetxController {
     Ordersmodel(
       id: 'SL1001',
       customerName: 'Rahul Kumar',
-      pickupLocation: 'Fresh Mart, Peelamedu',
+      pickupLocation:
+          '41, Government Arts College Rd, Opposite District Court, Gopalapuram, Coimbatore, Tamil Nadu 641018',
       deliveryLocation: 'Avinashi Road',
       amount: 245.00,
       status: 'Pending',
@@ -143,7 +145,8 @@ class HomeController extends GetxController {
     Ordersmodel(
       id: 'SL1002',
       customerName: 'Priya Sharma',
-      pickupLocation: 'Sri Bakery, Gandhipuram',
+      pickupLocation:
+          '41, Government Arts College Rd, Opposite District Court, Gopalapuram, Coimbatore, Tamil Nadu 641018',
       deliveryLocation: 'RS Puram',
       amount: 180.00,
       status: 'Accepted',
@@ -153,7 +156,8 @@ class HomeController extends GetxController {
     Ordersmodel(
       id: 'SL1003',
       customerName: 'Arun Raj',
-      pickupLocation: 'Green Pharmacy, Saibaba Colony',
+      pickupLocation:
+          '41, Government Arts College Rd, Opposite District Court, Gopalapuram, Coimbatore, Tamil Nadu 641018',
       deliveryLocation: 'Singanallur',
       amount: 320.00,
       status: 'Completed',
@@ -163,7 +167,8 @@ class HomeController extends GetxController {
     Ordersmodel(
       id: 'SL1004',
       customerName: 'Meena',
-      pickupLocation: 'Local Fresh, Race Course',
+      pickupLocation:
+          '41, Government Arts College Rd, Opposite District Court, Gopalapuram, Coimbatore, Tamil Nadu 641018',
       deliveryLocation: 'Ukkadam',
       amount: 150.00,
       status: 'Pending',

@@ -1,5 +1,8 @@
+import 'package:deliveryagent/app/modules/home/models/OrdersModel.dart';
+import 'package:deliveryagent/app/routes/app_routes.dart';
 import 'package:deliveryagent/app/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class OrderCard extends StatelessWidget {
   const OrderCard({
@@ -47,6 +50,16 @@ class OrderCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final orderData = Ordersmodel(
+      id: id,
+      customerName: customerName,
+      pickupLocation: pickupLocation,
+      deliveryLocation: deliveryLocation,
+      amount: amount,
+      status: status,
+      orderTime: orderTime,
+    );
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       padding: const EdgeInsets.all(16.0),
@@ -61,7 +74,6 @@ class OrderCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Header Row: Order ID, Status Badge, Amount
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -104,8 +116,6 @@ class OrderCard extends StatelessWidget {
           const SizedBox(height: 12),
           Divider(height: 1, color: Colors.grey.shade200),
           const SizedBox(height: 12),
-
-          // Customer Name & Order Time Row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -187,7 +197,6 @@ class OrderCard extends StatelessWidget {
               ),
             ),
           ),
-          // Delivery Location
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -227,8 +236,6 @@ class OrderCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-
-          // Action Button
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
@@ -241,7 +248,10 @@ class OrderCard extends StatelessWidget {
                 elevation: 0,
               ),
               onPressed: () {
-                // Action on tap
+                showDialog(
+                  context: context,
+                  builder: (context) => SuccessfulCard(orderData: orderData),
+                );
               },
               child: Text(
                 status.toLowerCase() == 'accepted'
@@ -258,6 +268,66 @@ class OrderCard extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class SuccessfulCard extends StatelessWidget {
+  const SuccessfulCard({super.key, this.orderData});
+
+  final Ordersmodel? orderData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      shadowColor: Colors.grey,
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: 20,
+              backgroundColor: const Color.fromARGB(255, 238, 221, 142),
+              child: Icon(Icons.check_circle, color: AppColors.framecolor),
+            ),
+            const SizedBox(height: 5),
+            const Text(
+              'Order Accepted',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 3),
+            const Text(
+              'You have successfully accepted',
+              style: TextStyle(color: Colors.grey),
+            ),
+            const Text(
+              'the order',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.grey),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.framecolor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              onPressed: () {
+                Get.back();
+                Get.toNamed(Routes.mapView, arguments: orderData);
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        ),
       ),
     );
   }

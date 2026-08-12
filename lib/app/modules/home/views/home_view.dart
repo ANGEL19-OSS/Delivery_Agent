@@ -3,6 +3,7 @@ import 'package:deliveryagent/app/widgets/order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
+import '../../../routes/app_routes.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({super.key});
@@ -10,6 +11,33 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        onTap: (value) {
+          if (value == 0) {
+            Get.toNamed(Routes.home);
+          } else if (value == 1) {
+            Get.toNamed(Routes.orderDetail);
+          } else if (value == 2) {
+            Get.toNamed(Routes.checkin);
+          }
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, color: AppColors.framecolor),
+            label: 'home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag, color: AppColors.framecolor),
+            label: 'orders',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.wallet, color: AppColors.framecolor),
+            label: 'earnings',
+          ),
+        ],
+      ),
+
       backgroundColor: Colors.amber.shade100,
       appBar: AppBar(
         backgroundColor: Colors.amber.shade100,
@@ -171,7 +199,7 @@ class HomeView extends GetView<HomeController> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              //get.toorder page full
+                              Get.toNamed(Routes.orderDetail);
                             },
                             child: Text(
                               "ViewAll",
@@ -185,9 +213,20 @@ class HomeView extends GetView<HomeController> {
                       ),
                     ),
                     Expanded(
-                      child: Obx(
-                        () => ListView.builder(
-                          itemCount: controller.orders.length,
+                      child: Obx(() {
+                        if (controller.orders.isEmpty) {
+                          return const Center(
+                            child: Text(
+                              "No assigned orders",
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                          );
+                        }
+                        final displayCount = controller.orders.length > 2
+                            ? 2
+                            : controller.orders.length;
+                        return ListView.builder(
+                          itemCount: displayCount,
                           itemBuilder: (context, index) {
                             final data = controller.orders[index];
                             return OrderCard(
@@ -200,8 +239,8 @@ class HomeView extends GetView<HomeController> {
                               orderTime: data.orderTime,
                             );
                           },
-                        ),
-                      ),
+                        );
+                      }),
                     ),
                   ],
                 ),
