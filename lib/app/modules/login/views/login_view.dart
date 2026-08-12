@@ -247,8 +247,7 @@ class LoginView extends GetView<LoginController> {
                                           // 1. Show Locating Splash Dialog
                                           Get.dialog(
                                             const LocatingCard(
-                                              message:
-                                                  'Locating agent & verifying 200m store radius...',
+                                              message: 'Locating.......',
                                             ),
                                             barrierDismissible: false,
                                           );

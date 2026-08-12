@@ -1,3 +1,4 @@
+import 'package:deliveryagent/app/modules/home/controllers/home_controller.dart';
 import 'package:deliveryagent/app/modules/login/controllers/login_controller.dart';
 import 'package:get/get.dart';
 import '../modules/checkin/views/checkin_view.dart';
@@ -21,7 +22,13 @@ class AppPages {
       }),
     ),
     GetPage(name: Routes.checkin, page: () => const CheckinView()),
-    GetPage(name: Routes.home, page: () => const HomeView()),
+    GetPage(
+      name: Routes.home,
+      page: () => const HomeView(),
+      binding: BindingsBuilder(
+        () => Get.lazyPut<HomeController>(() => HomeController()),
+      ),
+    ),
     GetPage(name: Routes.orderDetail, page: () => const OrderDetailView()),
     GetPage(name: Routes.dashboard, page: () => const DashboardView()),
   ];
