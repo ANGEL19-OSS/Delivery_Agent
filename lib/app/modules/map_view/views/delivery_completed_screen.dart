@@ -31,7 +31,11 @@ class DeliveryCompletedScreen extends StatelessWidget {
                       shape: BoxShape.circle,
                     ),
                   ),
-                  const Icon(Icons.moped, size: 85, color: AppColors.framecolor),
+                  const Icon(
+                    Icons.moped,
+                    size: 85,
+                    color: AppColors.framecolor,
+                  ),
                   Positioned(
                     top: 10,
                     right: 15,

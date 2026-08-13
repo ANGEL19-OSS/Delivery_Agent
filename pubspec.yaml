@@ -38,6 +38,7 @@ dependencies:
   geolocator: ^14.0.2
   geocoding: ^5.0.0
   google_maps: ^8.3.0
+  device_preview: ^1.2.0
 
 dev_dependencies:
   flutter_test:

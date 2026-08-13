@@ -4,7 +4,6 @@ import 'package:deliveryagent/app/modules/map_view/controllers/map_controller.da
 import 'package:deliveryagent/app/modules/map_view/views/map_view.dart';
 import 'package:deliveryagent/app/modules/order_detail/controllers/order_detail_controller.dart';
 import 'package:get/get.dart';
-import '../modules/checkin/views/checkin_view.dart';
 import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/views/login_view.dart';
@@ -24,7 +23,7 @@ class AppPages {
         Get.lazyPut<LoginController>(() => LoginController());
       }),
     ),
-    GetPage(name: Routes.checkin, page: () => const CheckinView()),
+
     GetPage(
       name: Routes.home,
       page: () => const HomeView(),

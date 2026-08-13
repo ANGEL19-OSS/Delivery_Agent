@@ -32,26 +32,29 @@ class HomeController extends GetxController {
   Future<void> getWeather() async {
     try {
       isWeatherLoading.value = true;
-
       weatherError.value = '';
 
-      Position position = await locationService.getCurrentLocation();
+      double lat = 11.0168;
+      double lon = 76.9558;
 
-      cityname.value = await locationService.getCityName(position);
-
-      print('Latitude: ${position.latitude}');
-
-      print('Longitude: ${position.longitude}');
+      try {
+        Position position = await locationService.getCurrentLocation();
+        lat = position.latitude;
+        lon = position.longitude;
+        cityname.value = await locationService.getCityName(position);
+      } catch (locationErr) {
+        debugPrint('Location/Geocoding Warning: $locationErr');
+        cityname.value = 'Coimbatore';
+      }
 
       WeatherModel result = await weatherService.getWeather(
-        latitude: position.latitude,
-        longitude: position.longitude,
+        latitude: lat,
+        longitude: lon,
       );
 
       weather.value = result;
     } catch (e) {
       weatherError.value = e.toString();
-
       debugPrint('Weather Error: $e');
     } finally {
       isWeatherLoading.value = false;
