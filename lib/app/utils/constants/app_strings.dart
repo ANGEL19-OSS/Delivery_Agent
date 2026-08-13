@@ -1,7 +1,8 @@
 class AppStrings {
   static const String appName = 'Delivery Agent';
   static const String loginTitle = 'Login';
-  static const String errWrongPassword = 'Wrong password. Please enter the correct password.';
+  static const String errWrongPassword =
+      'Wrong password. Please enter the correct password.';
   static const String msgLoginSuccess = 'Login Successful';
   static const String welcome = 'Welcome Back!';
   static const String loginToContinue = 'Login to continue';
@@ -11,16 +12,19 @@ class AppStrings {
   static const String errEnterEmail = 'Please enter your email id';
   static const String errValidEmail = 'Please enter a valid email id';
   static const String errEnterPassword = 'Please enter your password';
-  static const String errValidPassword = 'Please enter a valid password';
+  static const String errValidPassword =
+      'password must be at least 8 characters';
   static const String errValidCredentials = 'Please fill in valid credentials.';
   static const String locating = 'Locating....';
   static const String locatingAgent = 'Locating Agent...';
-  static const String verifyingLocality = 'Verifying store locality & radius...';
+  static const String verifyingLocality =
+      'Verifying store locality & radius...';
   static const String success = 'Success';
   static const String error = 'Error';
   static const String checkinSuccess = 'Check-in successful!';
   static const String checkinFailed = 'Check-in failed!';
-  static const String mustBeWithinRadius = 'Must be within 200m radius of store.';
+  static const String mustBeWithinRadius =
+      'Must be within 200m radius of store.';
 
   static const String navHome = 'home';
   static const String navOrders = 'orders';
@@ -59,18 +63,22 @@ class AppStrings {
   static const String scanQrToPay = 'Scan QR code to pay';
   static const String confirmAction = 'Confirm action?';
   static const String reachedCustomer = 'Reached Customer';
-  static const String reachedDestinationMsg = 'You have reached customer destination';
+  static const String reachedDestinationMsg =
+      'You have reached customer destination';
   static const String showQrToCustomer = 'Show this QR code\nto customer';
   static const String scanAndPay = 'Scan & Pay';
   static const String orderId = 'Order ID';
   static const String amount = 'Amount';
-  static const String paymentConfirmNotice = 'Payment will be confirmed\nafter successful scan.';
+  static const String paymentConfirmNotice =
+      'Payment will be confirmed\nafter successful scan.';
   static const String cancel = 'Cancel';
   static const String orderDeliveredSuccess = 'Order Delivered\nSuccessfully!';
-  static const String thankYouDeliveryMsg = 'Thank you for completing\nthe delivery.';
+  static const String thankYouDeliveryMsg =
+      'Thank you for completing\nthe delivery.';
   static const String earnings = 'Earnings';
   static const String done = 'Done';
   static const String deliveryCompleted = 'Delivery Completed!';
-  static const String orderDeliveredSuccessMsg = 'The order has been delivered\nsuccessfully.';
+  static const String orderDeliveredSuccessMsg =
+      'The order has been delivered\nsuccessfully.';
   static const String great = 'Great!';
 }
