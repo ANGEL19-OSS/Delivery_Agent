@@ -1,11 +1,13 @@
 import 'package:deliveryagent/app/modules/home/models/OrdersModel.dart';
 import 'package:deliveryagent/app/utils/constants/app_colors.dart';
+import 'package:deliveryagent/app/utils/constants/app_strings.dart';
+import 'package:deliveryagent/app/utils/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'qr_payment_screen.dart';
 
 class ReachedCustomerScreen extends StatelessWidget {
-  ReachedCustomerScreen({required this.orderdata});
+  const ReachedCustomerScreen({super.key, required this.orderdata});
   final Ordersmodel orderdata;
   @override
   Widget build(BuildContext context) {
@@ -32,25 +34,18 @@ class ReachedCustomerScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Image.asset('assets/reached_customer.png'),
-                  SizedBox(height: 5),
-                  Text(
-                    'You have reached customer destination',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                  const SizedBox(height: 5),
+                  const Text(
+                    AppStrings.reachedDestinationMsg,
+                    style: AppTextStyles.h5,
                   ),
-                  SizedBox(height: 3),
+                  const SizedBox(height: 3),
                   Text(
-                    orderdata.deliveryLocation ?? '',
+                    orderdata.deliveryLocation,
                     maxLines: 2,
-                    style: TextStyle(
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTextStyles.subtitleGreyBold,
                   ),
-                  SizedBox(height: 4),
+                  const SizedBox(height: 4),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.framecolor,
@@ -61,13 +56,9 @@ class ReachedCustomerScreen extends StatelessWidget {
                     onPressed: () {
                       Get.to(() => QRPaymentScreen(orderdata: orderdata));
                     },
-                    child: Text(
-                      'Reached Customer',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
+                    child: const Text(
+                      AppStrings.reachedCustomer,
+                      style: AppTextStyles.buttonText,
                     ),
                   ),
                 ],

@@ -1,6 +1,8 @@
 import 'package:deliveryagent/app/modules/home/models/OrdersModel.dart';
 import 'package:deliveryagent/app/routes/app_routes.dart';
 import 'package:deliveryagent/app/utils/constants/app_colors.dart';
+import 'package:deliveryagent/app/utils/constants/app_strings.dart';
+import 'package:deliveryagent/app/utils/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -11,7 +13,7 @@ class DeliveryCompletedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 24.0),
@@ -24,24 +26,24 @@ class DeliveryCompletedScreen extends StatelessWidget {
                   Container(
                     width: 140,
                     height: 140,
-                    decoration: BoxDecoration(
-                      color: Colors.amber.shade50,
+                    decoration: const BoxDecoration(
+                      color: AppColors.amberBgExtraLight,
                       shape: BoxShape.circle,
                     ),
                   ),
-                  Icon(Icons.moped, size: 85, color: AppColors.framecolor),
+                  const Icon(Icons.moped, size: 85, color: AppColors.framecolor),
                   Positioned(
                     top: 10,
                     right: 15,
                     child: Container(
                       padding: const EdgeInsets.all(4),
                       decoration: const BoxDecoration(
-                        color: Colors.green,
+                        color: AppColors.successGreen,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
                         Icons.check,
-                        color: Colors.white,
+                        color: AppColors.textWhite,
                         size: 16,
                       ),
                     ),
@@ -50,19 +52,15 @@ class DeliveryCompletedScreen extends StatelessWidget {
               ),
               const SizedBox(height: 36),
               const Text(
-                'Delivery Completed!',
+                AppStrings.deliveryCompleted,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
+                style: AppTextStyles.h1,
               ),
               const SizedBox(height: 12),
               const Text(
-                'The order has been delivered\nsuccessfully.',
+                AppStrings.orderDeliveredSuccessMsg,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: Colors.grey, height: 1.3),
+                style: AppTextStyles.subtitleGrey,
               ),
 
               const Spacer(),
@@ -79,14 +77,24 @@ class DeliveryCompletedScreen extends StatelessWidget {
                   ),
                   onPressed: () {
                     Get.offAllNamed(Routes.home);
+                    Get.snackbar(
+                      'Order Delivered 🎉',
+                      'Order #${orderdata.id} has been delivered successfully!',
+                      snackPosition: SnackPosition.TOP,
+                      backgroundColor: AppColors.framecolor,
+                      colorText: AppColors.background,
+                      icon: const Icon(
+                        Icons.check_circle_outline,
+                        color: AppColors.background,
+                      ),
+                      duration: const Duration(seconds: 4),
+                      margin: const EdgeInsets.all(16),
+                      borderRadius: 12,
+                    );
                   },
                   child: const Text(
-                    'Great!',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
+                    AppStrings.great,
+                    style: AppTextStyles.buttonText,
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../utils/constants/app_strings.dart';
 import '../controllers/checkin_controller.dart';
 
 class CheckinView extends GetView<CheckinController> {
@@ -8,8 +9,8 @@ class CheckinView extends GetView<CheckinController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Store Check-In')),
-      body: const Center(child: Text('Store Check-In View')),
+      appBar: AppBar(title: const Text(AppStrings.storeCheckInTitle)),
+      body: const Center(child: Text(AppStrings.storeCheckInView)),
     );
   }
 }

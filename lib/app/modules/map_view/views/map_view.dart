@@ -1,5 +1,7 @@
 import 'package:deliveryagent/app/modules/map_view/views/reached_customer_screen.dart';
 import 'package:deliveryagent/app/utils/constants/app_colors.dart';
+import 'package:deliveryagent/app/utils/constants/app_strings.dart';
+import 'package:deliveryagent/app/utils/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/map_controller.dart';
@@ -14,7 +16,7 @@ class MapView extends GetView<MapController> {
         children: [
           Positioned.fill(
             child: Container(
-              color: const Color(0xFFF4F3EF),
+              color: AppColors.mapBg,
               child: CustomPaint(painter: MockMapBackgroundPainter()),
             ),
           ),
@@ -25,7 +27,7 @@ class MapView extends GetView<MapController> {
               width: 24,
               height: 24,
               decoration: BoxDecoration(
-                color: const Color(0xFF3880FF).withOpacity(0.3),
+                color: AppColors.routeBlue.withOpacity(0.3),
                 shape: BoxShape.circle,
               ),
               child: Center(
@@ -33,12 +35,12 @@ class MapView extends GetView<MapController> {
                   width: 14,
                   height: 14,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF3880FF),
+                    color: AppColors.routeBlue,
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 2.5),
+                    border: Border.all(color: AppColors.background, width: 2.5),
                     boxShadow: const [
                       BoxShadow(
-                        color: Colors.black26,
+                        color: AppColors.shadowBlack26,
                         blurRadius: 4,
                         offset: Offset(0, 2),
                       ),
@@ -54,7 +56,7 @@ class MapView extends GetView<MapController> {
             child: const Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(Icons.location_on, color: Colors.redAccent, size: 38),
+                Icon(Icons.location_on, color: AppColors.errorRedAccent, size: 38),
               ],
             ),
           ),
@@ -63,18 +65,18 @@ class MapView extends GetView<MapController> {
             left: 16,
             child: Container(
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: AppColors.background,
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black12,
+                    color: AppColors.shadowBlack12,
                     blurRadius: 8,
                     offset: Offset(0, 2),
                   ),
                 ],
               ),
               child: IconButton(
-                icon: const Icon(Icons.arrow_back, color: Colors.black87),
+                icon: const Icon(Icons.arrow_back, color: AppColors.textBlack87),
                 onPressed: () => Get.back(),
               ),
             ),
@@ -86,11 +88,11 @@ class MapView extends GetView<MapController> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.background,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: const [
                   BoxShadow(
-                    color: Colors.black12,
+                    color: AppColors.shadowBlack12,
                     blurRadius: 10,
                     offset: Offset(0, 3),
                   ),
@@ -101,15 +103,11 @@ class MapView extends GetView<MapController> {
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: const [
-                      Icon(Icons.arrow_upward, size: 32, color: Colors.black87),
+                      Icon(Icons.arrow_upward, size: 32, color: AppColors.textBlack87),
                       SizedBox(height: 2),
                       Text(
                         '650 m',
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
-                        ),
+                        style: AppTextStyles.captionBold,
                       ),
                     ],
                   ),
@@ -120,7 +118,7 @@ class MapView extends GetView<MapController> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black87,
+                        color: AppColors.textBlack87,
                         height: 1.3,
                       ),
                     ),
@@ -136,21 +134,21 @@ class MapView extends GetView<MapController> {
               children: [
                 FloatingActionButton.small(
                   heroTag: 'compass_map',
-                  backgroundColor: Colors.white,
+                  backgroundColor: AppColors.background,
                   elevation: 3,
                   onPressed: () => controller.recenterMap(),
                   child: const Icon(
                     Icons.explore_outlined,
-                    color: Colors.black87,
+                    color: AppColors.textBlack87,
                   ),
                 ),
                 const SizedBox(height: 8),
                 FloatingActionButton.small(
                   heroTag: 'target_map',
-                  backgroundColor: Colors.white,
+                  backgroundColor: AppColors.background,
                   elevation: 3,
                   onPressed: () => controller.recenterMap(),
-                  child: const Icon(Icons.my_location, color: Colors.black87),
+                  child: const Icon(Icons.my_location, color: AppColors.textBlack87),
                 ),
               ],
             ),
@@ -162,14 +160,14 @@ class MapView extends GetView<MapController> {
             child: Container(
               padding: const EdgeInsets.all(24.0),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: AppColors.background,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(28),
                   topRight: Radius.circular(28),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black12,
+                    color: AppColors.shadowBlack12,
                     blurRadius: 12,
                     offset: Offset(0, -3),
                   ),
@@ -189,7 +187,7 @@ class MapView extends GetView<MapController> {
                           child: Icon(
                             Icons.circle_outlined,
                             size: 18,
-                            color: Colors.green,
+                            color: AppColors.successGreen,
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -198,10 +196,10 @@ class MapView extends GetView<MapController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                'Pickup',
+                                AppStrings.pickup,
                                 style: TextStyle(
                                   fontSize: 11,
-                                  color: Colors.grey,
+                                  color: AppColors.textGrey,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -211,11 +209,7 @@ class MapView extends GetView<MapController> {
                                     'Fresh Mart, T. Nagar',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
+                                style: AppTextStyles.bodyBold,
                               ),
                             ],
                           ),
@@ -231,7 +225,7 @@ class MapView extends GetView<MapController> {
                       child: Container(
                         width: 2,
                         height: 20,
-                        color: Colors.grey.shade300,
+                        color: AppColors.dividerLight,
                       ),
                     ),
                     Row(
@@ -242,7 +236,7 @@ class MapView extends GetView<MapController> {
                           child: Icon(
                             Icons.location_on,
                             size: 20,
-                            color: Colors.redAccent,
+                            color: AppColors.errorRedAccent,
                           ),
                         ),
                         const SizedBox(width: 12),
@@ -251,10 +245,10 @@ class MapView extends GetView<MapController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                'Drop',
+                                AppStrings.drop,
                                 style: TextStyle(
                                   fontSize: 11,
-                                  color: Colors.grey,
+                                  color: AppColors.textGrey,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -264,11 +258,7 @@ class MapView extends GetView<MapController> {
                                     '12, Lake View Rd, Nungambakkam',
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black87,
-                                ),
+                                style: AppTextStyles.bodyBold,
                               ),
                             ],
                           ),
@@ -281,17 +271,13 @@ class MapView extends GetView<MapController> {
                               '4.2 km',
                               style: TextStyle(
                                 fontSize: 13,
-                                color: Colors.black54,
+                                color: AppColors.textBlack54,
                               ),
                             ),
                             SizedBox(height: 2),
                             Text(
                               '15 min',
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black87,
-                              ),
+                              style: AppTextStyles.bodyBold,
                             ),
                           ],
                         ),
@@ -313,12 +299,8 @@ class MapView extends GetView<MapController> {
                           ReachedCustomerScreen(orderdata: currentOrder!),
                         ),
                         child: const Text(
-                          'Reached Customer',
-                          style: TextStyle(
-                            color: AppColors.background,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
+                          AppStrings.reachedCustomer,
+                          style: AppTextStyles.buttonText,
                         ),
                       ),
                     ),
@@ -336,9 +318,9 @@ class MapView extends GetView<MapController> {
 class MockMapBackgroundPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final bgPaint = Paint()..color = const Color(0xFFF2EFE9);
+    final bgPaint = Paint()..color = AppColors.mapCanvasBg;
     canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), bgPaint);
-    final parkPaint = Paint()..color = const Color(0xFFDEEBD5);
+    final parkPaint = Paint()..color = AppColors.mapParkBg;
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromLTWH(20, size.height * 0.15, size.width * 0.45, 120),
@@ -359,7 +341,7 @@ class MockMapBackgroundPainter extends CustomPainter {
       parkPaint,
     );
     final roadPaint = Paint()
-      ..color = Colors.white
+      ..color = AppColors.background
       ..strokeWidth = 14
       ..style = PaintingStyle.stroke;
     canvas.drawLine(
@@ -393,7 +375,7 @@ class MockMapBackgroundPainter extends CustomPainter {
       roadPaint,
     );
     final routePaint = Paint()
-      ..color = const Color(0xFF3880FF)
+      ..color = AppColors.routeBlue
       ..strokeWidth = 6.0
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round

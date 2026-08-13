@@ -1,6 +1,8 @@
 import 'package:deliveryagent/app/modules/home/models/OrdersModel.dart';
 import 'package:deliveryagent/app/routes/app_routes.dart';
 import 'package:deliveryagent/app/utils/constants/app_colors.dart';
+import 'package:deliveryagent/app/utils/constants/app_strings.dart';
+import 'package:deliveryagent/app/utils/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -27,24 +29,24 @@ class OrderCard extends StatelessWidget {
   Color _getStatusColor(String status) {
     switch (status.toLowerCase()) {
       case 'accepted':
-        return Colors.blue;
+        return AppColors.statusAccepted;
       case 'completed':
-        return Colors.green;
+        return AppColors.statusCompleted;
       case 'pending':
       default:
-        return Colors.orange.shade800;
+        return AppColors.statusPending;
     }
   }
 
   Color _getStatusBgColor(String status) {
     switch (status.toLowerCase()) {
       case 'accepted':
-        return Colors.blue.shade50;
+        return AppColors.statusAcceptedBg;
       case 'completed':
-        return Colors.green.shade50;
+        return AppColors.statusCompletedBg;
       case 'pending':
       default:
-        return Colors.orange.shade50;
+        return AppColors.statusPendingBg;
     }
   }
 
@@ -66,9 +68,13 @@ class OrderCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.background,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.grey.shade200),
+        border: Border.all(color: AppColors.borderLight),
         boxShadow: const [
-          BoxShadow(color: Colors.black12, blurRadius: 8, offset: Offset(0, 3)),
+          BoxShadow(
+            color: AppColors.shadowBlack12,
+            blurRadius: 8,
+            offset: Offset(0, 3),
+          ),
         ],
       ),
       child: Column(
@@ -79,11 +85,7 @@ class OrderCard extends StatelessWidget {
             children: [
               Text(
                 '#$id',
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.black87,
-                ),
+                style: AppTextStyles.h5.copyWith(color: AppColors.textBlack87),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(
@@ -114,7 +116,7 @@ class OrderCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          Divider(height: 1, color: Colors.grey.shade200),
+          Divider(height: 1, color: AppColors.borderLight),
           const SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,40 +126,36 @@ class OrderCard extends StatelessWidget {
                   const Icon(
                     Icons.person_outline,
                     size: 16,
-                    color: Colors.grey,
+                    color: AppColors.textGrey,
                   ),
                   const SizedBox(width: 4),
-                  Text(
-                    customerName,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
-                  ),
+                  Text(customerName, style: AppTextStyles.bodyMedium),
                 ],
               ),
               Row(
                 children: [
-                  const Icon(Icons.access_time, size: 14, color: Colors.grey),
-                  const SizedBox(width: 4),
-                  Text(
-                    orderTime,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                  const Icon(
+                    Icons.access_time,
+                    size: 14,
+                    color: AppColors.textGrey,
                   ),
+                  const SizedBox(width: 4),
+                  Text(orderTime, style: AppTextStyles.caption),
                 ],
               ),
             ],
           ),
           const SizedBox(height: 14),
-
-          // Pickup Location
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
                 padding: EdgeInsets.only(top: 2),
-                child: Icon(Icons.circle, size: 12, color: Colors.green),
+                child: Icon(
+                  Icons.circle,
+                  size: 12,
+                  color: AppColors.successGreen,
+                ),
               ),
               const SizedBox(width: 8),
               Expanded(
@@ -165,21 +163,13 @@ class OrderCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'PICKUP LOCATION',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
+                      AppStrings.pickupLocationHeader,
+                      style: AppTextStyles.smallCaption,
                     ),
                     const SizedBox(height: 2),
                     Text(
                       pickupLocation,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
+                      style: AppTextStyles.bodyMedium.copyWith(fontSize: 13),
                     ),
                   ],
                 ),
@@ -193,7 +183,7 @@ class OrderCard extends StatelessWidget {
               child: VerticalDivider(
                 width: 1,
                 thickness: 1.5,
-                color: Colors.grey.shade400,
+                color: AppColors.dividerDark,
               ),
             ),
           ),
@@ -205,7 +195,7 @@ class OrderCard extends StatelessWidget {
                 child: Icon(
                   Icons.location_on,
                   size: 14,
-                  color: Colors.redAccent,
+                  color: AppColors.errorRedAccent,
                 ),
               ),
               const SizedBox(width: 8),
@@ -214,21 +204,13 @@ class OrderCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      'DELIVERY LOCATION',
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey,
-                      ),
+                      AppStrings.deliveryLocationHeader,
+                      style: AppTextStyles.smallCaption,
                     ),
                     const SizedBox(height: 2),
                     Text(
                       deliveryLocation,
-                      style: const TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black87,
-                      ),
+                      style: AppTextStyles.bodyMedium.copyWith(fontSize: 13),
                     ),
                   ],
                 ),
@@ -248,17 +230,19 @@ class OrderCard extends StatelessWidget {
                 elevation: 0,
               ),
               onPressed: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => SuccessfulCard(orderData: orderData),
-                );
+                if (orderData.status.toLowerCase() == 'pending') {
+                  showDialog(
+                    context: context,
+                    builder: (context) => SuccessfulCard(orderData: orderData),
+                  );
+                }
               },
               child: Text(
                 status.toLowerCase() == 'accepted'
-                    ? 'In Progress'
+                    ? AppStrings.btnInProgress
                     : status.toLowerCase() == 'completed'
-                    ? 'View Details'
-                    : 'Accept Order',
+                    ? AppStrings.btnViewDetails
+                    : AppStrings.btnAcceptOrder,
                 style: const TextStyle(
                   color: AppColors.background,
                   fontWeight: FontWeight.bold,
@@ -282,35 +266,29 @@ class SuccessfulCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      shadowColor: Colors.grey,
+      shadowColor: AppColors.textGrey,
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 20,
-              backgroundColor: const Color.fromARGB(255, 238, 221, 142),
+              backgroundColor: AppColors.lightYellowBg,
               child: Icon(Icons.check_circle, color: AppColors.framecolor),
             ),
             const SizedBox(height: 5),
-            const Text(
-              'Order Accepted',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
+            const Text(AppStrings.orderAccepted, style: AppTextStyles.bodyBold),
             const SizedBox(height: 3),
             const Text(
-              'You have successfully accepted',
-              style: TextStyle(color: Colors.grey),
+              AppStrings.orderAcceptedMsg1,
+              style: AppTextStyles.subtitleGrey,
             ),
             const Text(
-              'the order',
+              AppStrings.orderAcceptedMsg2,
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.grey),
+              style: AppTextStyles.subtitleGrey,
             ),
             const SizedBox(height: 10),
             ElevatedButton(
@@ -324,7 +302,7 @@ class SuccessfulCard extends StatelessWidget {
                 Get.back();
                 Get.toNamed(Routes.mapView, arguments: orderData);
               },
-              child: const Text('OK'),
+              child: const Text(AppStrings.ok),
             ),
           ],
         ),

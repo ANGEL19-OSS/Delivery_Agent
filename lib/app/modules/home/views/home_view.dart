@@ -1,4 +1,6 @@
 import 'package:deliveryagent/app/utils/constants/app_colors.dart';
+import 'package:deliveryagent/app/utils/constants/app_strings.dart';
+import 'package:deliveryagent/app/utils/constants/app_text_styles.dart';
 import 'package:deliveryagent/app/widgets/order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +13,92 @@ class HomeView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: AppColors.background,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(
+              decoration: const BoxDecoration(color: AppColors.framecolor),
+              accountName: const Text(
+                'Priya',
+                style: TextStyle(
+                  color: AppColors.background,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+              ),
+              accountEmail: const Text(
+                'priya.agent@pazhamudir.com',
+                style: TextStyle(color: AppColors.background),
+              ),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: AppColors.background,
+                child: Icon(
+                  Icons.person,
+                  color: AppColors.framecolor,
+                  size: 36,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.dashboard_outlined,
+                color: AppColors.framecolor,
+              ),
+              title: const Text('Dashboard', style: AppTextStyles.bodyMedium),
+              onTap: () {
+                Get.back();
+                Get.toNamed(Routes.dashboard);
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.shopping_bag_outlined,
+                color: AppColors.framecolor,
+              ),
+              title: const Text('Orders', style: AppTextStyles.bodyMedium),
+              onTap: () {
+                Get.back();
+                Get.toNamed(Routes.orderDetail);
+              },
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.person_outline,
+                color: AppColors.framecolor,
+              ),
+              title: const Text('Profile', style: AppTextStyles.bodyMedium),
+              onTap: () {
+                Get.back();
+                Get.snackbar(
+                  'Profile',
+                  'Profile details',
+                  snackPosition: SnackPosition.BOTTOM,
+                  backgroundColor: AppColors.amberBgLight,
+                );
+              },
+            ),
+            const Divider(color: AppColors.borderLight),
+            ListTile(
+              leading: const Icon(Icons.logout, color: AppColors.errorRed),
+              title: const Text(
+                'Logout',
+                style: TextStyle(
+                  color: AppColors.errorRed,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onTap: () {
+                Get.back();
+                Get.offAllNamed(Routes.login);
+              },
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.amberBgLight,
         currentIndex: 0,
         onTap: (value) {
           if (value == 0) {
@@ -19,52 +106,45 @@ class HomeView extends GetView<HomeController> {
           } else if (value == 1) {
             Get.toNamed(Routes.orderDetail);
           } else if (value == 2) {
-            Get.toNamed(Routes.checkin);
+            Get.toNamed(Routes.dashboard);
           }
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home, color: AppColors.framecolor),
-            label: 'home',
+            label: AppStrings.navHome,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag, color: AppColors.framecolor),
-            label: 'orders',
+            label: AppStrings.navOrders,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.wallet, color: AppColors.framecolor),
-            label: 'earnings',
+            label: AppStrings.navEarnings,
           ),
         ],
       ),
 
-      backgroundColor: Colors.amber.shade100,
+      backgroundColor: AppColors.amberBgLight,
       appBar: AppBar(
-        backgroundColor: Colors.amber.shade100,
-        leading: IconButton(
-          onPressed: () {
-            //drawer
-          },
-          icon: Icon(Icons.menu, color: AppColors.framecolor),
-          padding: EdgeInsets.all(20),
+        backgroundColor: AppColors.amberBgLight,
+        leading: Builder(
+          builder: (context) => IconButton(
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+            icon: const Icon(Icons.menu, color: AppColors.framecolor),
+            padding: const EdgeInsets.all(20),
+          ),
         ),
       ),
       body: Stack(
         children: [
-          Positioned(
+          const Positioned(
             top: 20,
             left: 20,
             child: Column(
-              children: [
-                Text(
-                  'Good day! Priya👋',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 24,
-                  ),
-                ),
-              ],
+              children: [Text(AppStrings.greeting, style: AppTextStyles.h1)],
             ),
           ),
           Positioned(
@@ -74,20 +154,20 @@ class HomeView extends GetView<HomeController> {
               height: 110,
               width: 200,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 251, 250, 250),
+                color: AppColors.cardBgLight,
                 borderRadius: BorderRadius.circular(20),
                 shape: BoxShape.rectangle,
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.grey.shade100,
+                    color: AppColors.borderLight,
                     blurRadius: 10,
-                    offset: Offset(0, 2),
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
               child: Obx(() {
                 if (controller.isWeatherLoading.value) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(
                       color: AppColors.framecolor,
                     ),
@@ -95,7 +175,7 @@ class HomeView extends GetView<HomeController> {
                 } else {
                   final data = controller.weather.value;
                   if (data == null) {
-                    return Text("No data");
+                    return const Text(AppStrings.noData);
                   }
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -105,25 +185,20 @@ class HomeView extends GetView<HomeController> {
                       children: [
                         Text(
                           controller.cityname.value,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
-                            color: const Color.fromARGB(255, 222, 183, 9),
+                            color: AppColors.accentYellow,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
                           '${data.temperature.round()}°C',
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: AppTextStyles.h3,
                         ),
                         Text(
                           controller.getWeatherDescription(data.weatherCode),
-                          style: TextStyle(
+                          style: AppTextStyles.subtitleGreyBold.copyWith(
                             fontSize: 15,
-                            color: Colors.grey,
-                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         Row(
@@ -132,19 +207,15 @@ class HomeView extends GetView<HomeController> {
                           children: [
                             Text(
                               '${data.humidity}%',
-                              style: TextStyle(
+                              style: AppTextStyles.subtitleGreyBold.copyWith(
                                 fontSize: 15,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(width: 5),
+                            const SizedBox(width: 5),
                             Text(
                               '${data.windSpeed}km/h',
-                              style: TextStyle(
+                              style: AppTextStyles.subtitleGreyBold.copyWith(
                                 fontSize: 15,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
@@ -161,10 +232,7 @@ class HomeView extends GetView<HomeController> {
             right: -40,
             width: 250,
             height: 300,
-            child: Image.asset(
-              'assets/welcome_component1.png',
-              // colorBlendMode: BlendMode.multiply,
-            ),
+            child: Image.asset('assets/welcome_component1.png'),
           ),
           Positioned(
             top: 200,
@@ -172,7 +240,7 @@ class HomeView extends GetView<HomeController> {
             left: 0,
             right: 0,
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
                   topRight: Radius.circular(30),
@@ -190,19 +258,16 @@ class HomeView extends GetView<HomeController> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            "Assigned Orders",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                          const Text(
+                            AppStrings.assignedOrders,
+                            style: AppTextStyles.h5,
                           ),
                           GestureDetector(
                             onTap: () {
                               Get.toNamed(Routes.orderDetail);
                             },
-                            child: Text(
-                              "ViewAll",
+                            child: const Text(
+                              AppStrings.viewAll,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: AppColors.framecolor,
@@ -217,8 +282,8 @@ class HomeView extends GetView<HomeController> {
                         if (controller.orders.isEmpty) {
                           return const Center(
                             child: Text(
-                              "No assigned orders",
-                              style: TextStyle(color: Colors.grey),
+                              AppStrings.noAssignedOrders,
+                              style: AppTextStyles.subtitleGrey,
                             ),
                           );
                         }

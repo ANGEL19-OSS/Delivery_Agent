@@ -1,5 +1,6 @@
 import 'package:deliveryagent/app/utils/constants/app_colors.dart';
 import 'package:deliveryagent/app/utils/constants/app_strings.dart';
+import 'package:deliveryagent/app/utils/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../routes/app_routes.dart';
@@ -61,19 +62,16 @@ class LoginView extends GetView<LoginController> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 AppStrings.welcome,
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: AppTextStyles.h4,
                               ),
-                              SizedBox(height: 10),
-                              Text(
-                                'Login to continue',
-                                style: TextStyle(color: Colors.grey),
+                              const SizedBox(height: 10),
+                              const Text(
+                                AppStrings.loginToContinue,
+                                style: AppTextStyles.subtitleGrey,
                               ),
-                              SizedBox(height: 10),
+                              const SizedBox(height: 10),
                               Form(
                                 key: controller.formkey,
                                 child: Column(
@@ -86,22 +84,17 @@ class LoginView extends GetView<LoginController> {
                                               horizontal: 16,
                                               vertical: 12,
                                             ),
-                                        prefixIcon: Icon(
+                                        prefixIcon: const Icon(
                                           Icons.email_outlined,
-                                          color: const Color.fromARGB(
-                                            255,
-                                            238,
-                                            196,
-                                            9,
-                                          ),
+                                          color: AppColors.framecolor,
                                           size: 20,
                                         ),
-                                        labelText: 'Email',
+                                        labelText: AppStrings.email,
                                         border: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(
                                             12,
                                           ),
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: AppColors.surface,
                                           ),
                                         ),
@@ -111,9 +104,9 @@ class LoginView extends GetView<LoginController> {
                                           AutovalidateMode.onUserInteraction,
                                       validator: (value) {
                                         if (value == null || value.isEmpty) {
-                                          return 'Please enter your email id';
+                                          return AppStrings.errEnterEmail;
                                         } else if (!value.contains('@')) {
-                                          return 'Please enter a valid email id';
+                                          return AppStrings.errValidEmail;
                                         }
                                         final emailRegex = RegExp(
                                           r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
@@ -122,7 +115,7 @@ class LoginView extends GetView<LoginController> {
                                         if (!emailRegex.hasMatch(
                                           value.trim(),
                                         )) {
-                                          return "Enter a valid email";
+                                          return AppStrings.errValidEmail;
                                         }
                                         return null;
                                       },
@@ -137,17 +130,12 @@ class LoginView extends GetView<LoginController> {
                                                 horizontal: 16,
                                                 vertical: 12,
                                               ),
-                                          prefixIcon: Icon(
+                                          prefixIcon: const Icon(
                                             Icons.lock_clock_outlined,
-                                            color: const Color.fromARGB(
-                                              255,
-                                              238,
-                                              196,
-                                              9,
-                                            ),
+                                            color: AppColors.framecolor,
                                             size: 20,
                                           ),
-                                          labelText: 'Password',
+                                          labelText: AppStrings.password,
                                           suffixIcon: IconButton(
                                             onPressed: () {
                                               controller.isVisible.value =
@@ -158,12 +146,7 @@ class LoginView extends GetView<LoginController> {
                                                   ? Icons.visibility
                                                   : Icons
                                                         .visibility_off_outlined,
-                                              color: const Color.fromARGB(
-                                                255,
-                                                238,
-                                                196,
-                                                9,
-                                              ),
+                                              color: AppColors.framecolor,
                                               size: 20,
                                             ),
                                           ),
@@ -172,12 +155,7 @@ class LoginView extends GetView<LoginController> {
                                               12,
                                             ),
                                             borderSide: const BorderSide(
-                                              color: Color.fromARGB(
-                                                255,
-                                                231,
-                                                231,
-                                                231,
-                                              ),
+                                              color: AppColors.inputBorderLight,
                                             ),
                                           ),
                                         ),
@@ -189,28 +167,20 @@ class LoginView extends GetView<LoginController> {
                                             AutovalidateMode.onUserInteraction,
                                         validator: (value) {
                                           if (value == null || value.isEmpty) {
-                                            return 'Please enter your password';
+                                            return AppStrings.errEnterPassword;
                                           } else if (value.length < 8) {
-                                            return 'Please enter a valid password';
+                                            return AppStrings.errValidPassword;
                                           }
                                           return null;
                                         },
                                       ),
                                     ),
-                                    Row(
+                                    const Row(
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Text(
-                                          'Forgot Password?',
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            color: const Color.fromARGB(
-                                              255,
-                                              238,
-                                              196,
-                                              9,
-                                            ),
-                                          ),
+                                          AppStrings.forgotPassword,
+                                          style: AppTextStyles.linkText,
                                         ),
                                       ],
                                     ),
@@ -219,12 +189,7 @@ class LoginView extends GetView<LoginController> {
                                       width: double.infinity,
                                       child: ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color.fromARGB(
-                                            255,
-                                            238,
-                                            196,
-                                            9,
-                                          ),
+                                          backgroundColor: AppColors.framecolor,
                                           shape: RoundedRectangleBorder(
                                             borderRadius: BorderRadius.circular(
                                               12,
@@ -238,7 +203,7 @@ class LoginView extends GetView<LoginController> {
                                             _showPopUpCard(
                                               const ErrorCard(
                                                 message:
-                                                    'Please fill in valid credentials.',
+                                                    AppStrings.errValidCredentials,
                                               ),
                                             );
                                             return;
@@ -247,7 +212,7 @@ class LoginView extends GetView<LoginController> {
                                           // 1. Show Locating Splash Dialog
                                           Get.dialog(
                                             const LocatingCard(
-                                              message: 'Locating....',
+                                              message: AppStrings.locating,
                                             ),
                                             barrierDismissible: false,
                                           );
@@ -272,7 +237,7 @@ class LoginView extends GetView<LoginController> {
                                             _showPopUpCard(
                                               SuccessfulCard(
                                                 message:
-                                                    'Check-in successful!\nYou are within ${distance.toStringAsFixed(1)}m of Pazhamudir Nilayam.',
+                                                    '${AppStrings.checkinSuccess}\nYou are within ${distance.toStringAsFixed(1)}m of Pazhamudir Nilayam.',
                                               ),
                                               duration: const Duration(
                                                 seconds: 2,
@@ -289,7 +254,7 @@ class LoginView extends GetView<LoginController> {
                                             _showPopUpCard(
                                               ErrorCard(
                                                 message:
-                                                    'Check-in failed!\nYou are ${distance.toStringAsFixed(1)}m away. Must be within 200m radius of store.',
+                                                    '${AppStrings.checkinFailed}\nYou are ${distance.toStringAsFixed(1)}m away. ${AppStrings.mustBeWithinRadius}',
                                               ),
                                               duration: const Duration(
                                                 seconds: 3,
@@ -298,14 +263,9 @@ class LoginView extends GetView<LoginController> {
                                           }
                                         },
                                         child: const Text(
-                                          'Login',
+                                          AppStrings.loginTitle,
                                           style: TextStyle(
-                                            color: Color.fromARGB(
-                                              255,
-                                              245,
-                                              243,
-                                              243,
-                                            ),
+                                            color: AppColors.textWhiteOff,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -338,26 +298,22 @@ class SuccessfulCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.check_circle, color: Colors.green, size: 60),
+            const Icon(Icons.check_circle, color: AppColors.successGreen, size: 60),
             const SizedBox(height: 16),
             const Text(
-              'Success',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+              AppStrings.success,
+              style: AppTextStyles.h3,
             ),
             const SizedBox(height: 8),
             Text(
               message,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
+              style: AppTextStyles.subtitleGrey,
               textAlign: TextAlign.center,
             ),
           ],
@@ -375,26 +331,22 @@ class ErrorCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
       child: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.error, color: Colors.red, size: 60),
+            const Icon(Icons.error, color: AppColors.errorRed, size: 60),
             const SizedBox(height: 16),
             const Text(
-              'Error',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+              AppStrings.error,
+              style: AppTextStyles.h3,
             ),
             const SizedBox(height: 8),
             Text(
               message,
-              style: const TextStyle(fontSize: 14, color: Colors.grey),
+              style: AppTextStyles.subtitleGrey,
               textAlign: TextAlign.center,
             ),
           ],

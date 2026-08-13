@@ -1,4 +1,6 @@
 import 'package:deliveryagent/app/utils/constants/app_colors.dart';
+import 'package:deliveryagent/app/utils/constants/app_strings.dart';
+import 'package:deliveryagent/app/utils/constants/app_text_styles.dart';
 import 'package:deliveryagent/app/widgets/order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,21 +13,21 @@ class OrderDetailView extends GetView<OrderDetailController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.amber.shade100,
+      backgroundColor: AppColors.amberBgLight,
       appBar: AppBar(
-        backgroundColor: Colors.amber.shade100,
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.more_vert))],
+        backgroundColor: AppColors.amberBgLight,
+        actions: [IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))],
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: Icon(Icons.arrow_back, color: Colors.black),
+          icon: const Icon(Icons.arrow_back, color: AppColors.textBlack),
         ),
-        title: Center(
-          child: const Text(
-            'Order Details',
+        title: const Center(
+          child: Text(
+            AppStrings.orderDetailsTitle,
             textAlign: TextAlign.center,
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: AppTextStyles.h5,
           ),
         ),
       ),
@@ -36,11 +38,11 @@ class OrderDetailView extends GetView<OrderDetailController> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _tab('All(12)', 0),
-                SizedBox(width: 5),
-                _tab('Accepted', 1),
-                SizedBox(width: 5),
-                _tab('Completed', 2),
+                _tab(AppStrings.tabAll, 0),
+                const SizedBox(width: 5),
+                _tab(AppStrings.tabAccepted, 1),
+                const SizedBox(width: 5),
+                _tab(AppStrings.tabCompleted, 2),
               ],
             ),
           ),
@@ -78,14 +80,14 @@ class OrderDetailView extends GetView<OrderDetailController> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: isSelected ? AppColors.framecolor : Colors.black,
+              color: isSelected ? AppColors.framecolor : AppColors.textBlack,
               width: 2,
             ),
           ),
           child: Text(
             title,
             style: TextStyle(
-              color: isSelected ? AppColors.framecolor : Colors.black,
+              color: isSelected ? AppColors.framecolor : AppColors.textBlack,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
